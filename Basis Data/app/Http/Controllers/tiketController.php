@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\tiket;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class tiketController extends Controller
@@ -108,7 +109,10 @@ class tiketController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'ID_Tiket' => 'required|unique:tiket,ID_Tiket',
+            'ID_Tiket' => [
+                'required',
+                Rule::unique('tiket')->ignore($id, 'ID_Tiket'),
+            ],
             'Harga' => 'required',
             'Jadwal_Berangkat' => 'required',
             'Tgl_Beli' => 'required',
