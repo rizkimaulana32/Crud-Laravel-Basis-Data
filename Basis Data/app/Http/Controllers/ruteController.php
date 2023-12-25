@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\rute;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class ruteController extends Controller
@@ -108,7 +109,10 @@ class ruteController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'ID_Rute' => 'required|unique:rute,ID_Rute',
+            'ID_Rute' => [
+                'required',
+                Rule::unique('rute')->ignore($id, 'ID_Rute'),
+            ],
             'Nama_Rute' => 'required',
             'Waktu_Berangkat' => 'required',
             'Waktu_Tiba' => 'required',
