@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\trip;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class tripController extends Controller
@@ -92,7 +93,10 @@ class tripController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'ID_Trip' => 'required|numeric|unique:trip,ID_Trip',
+            'ID_Trip' => [
+                'required','numeric:trip,ID_Trip',
+                Rule::unique('trip')->ignore($id, 'ID_Trip'),
+            ],
             'Nama_Trip' => 'required',
             'Jenis_Trip' => 'required',
             'ID_User' => 'required|exists:user,ID_User',
