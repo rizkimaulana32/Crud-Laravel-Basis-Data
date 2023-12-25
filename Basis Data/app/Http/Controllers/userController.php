@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\user;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class userController extends Controller
@@ -97,7 +98,10 @@ class userController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'ID_User' => 'required|numeric|unique:user,ID_User',
+            'ID_User' => [
+                'required','numeric:user,ID_User',
+                Rule::unique('user')->ignore($id, 'ID_User'),
+            ],
             'Nama_User' => 'required',
             'Sex' => 'required',
             'Email' => 'required',
