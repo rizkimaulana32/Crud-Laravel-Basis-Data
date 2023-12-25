@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\transportasi_publik;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class transportasipublikController extends Controller
@@ -85,7 +86,10 @@ class transportasipublikController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'ID_Transport' => 'required|unique:transportasi_publik,ID_Transport',
+            'ID_Transport' => [
+                'required',
+                Rule::unique('transportasi_publik')->ignore($id, 'ID_Transport'),
+            ],
             'Nama_Transport' => 'required',
             'Transport_Company' => 'required',
         ], [
