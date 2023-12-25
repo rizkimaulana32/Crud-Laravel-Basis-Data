@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\lokasi;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class lokasiController extends Controller
@@ -91,7 +92,10 @@ class lokasiController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'ID_Lokasi' => 'required|unique:lokasi,ID_Lokasi',
+            'ID_Lokasi' => [
+                'required',
+                Rule::unique('lokasi')->ignore($id, 'ID_Lokasi'),
+            ],
             'Jenis_Lokasi' => 'required',
             'Nama_Lokasi' => 'required',
             'ID_Kota' => 'required|exists:kota,ID_Kota',
