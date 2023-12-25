@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\kota;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
 class kotaController extends Controller
@@ -80,7 +81,10 @@ class kotaController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'ID_Kota' => 'required|unique:kota,ID_Kota',
+            'ID_Kota' => [
+                'required',
+                Rule::unique('kota')->ignore($id, 'ID_Kota'),
+            ],
             'Nama_Kota' => 'required',
         ], [
             'ID_Kota.required' => 'ID_Kota wajib diisi',
