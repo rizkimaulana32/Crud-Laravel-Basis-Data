@@ -55,6 +55,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="tiket">Tiket</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="query">Top Penjualan Tiket</a>
+                    </li>
 
 
                     {{-- <li class="nav-item">
