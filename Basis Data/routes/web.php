@@ -8,6 +8,7 @@ use App\Http\Controllers\tripController;
 use App\Http\Controllers\ruteController;
 use App\Http\Controllers\tiketController;
 use App\Http\Controllers\tripmempunyairuteController;
+use App\Http\Controllers\queryController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +35,4 @@ Route::resource('trip', tripController::class);
 Route::resource('rute', ruteController::class);
 Route::resource('tiket', tiketController::class);
 Route::resource('trip_mempunyai_rute', tripmempunyairuteController::class);
+Route::get('/query', [queryController::class, 'index']);
